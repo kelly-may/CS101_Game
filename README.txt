@@ -1,5 +1,5 @@
 CS101 Final Project for Codecademy
-Build a CLI game
+Build a CLI game - practice Python project
 Requirements:
 1. >= 1 interactive feature (input())
 2. use Git

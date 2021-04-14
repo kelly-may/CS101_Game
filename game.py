@@ -45,13 +45,52 @@ class Player:
     # maxes number of players
     # assigns list of cards per player
     # calculates total value for each player
+    # passes deck of cards so can make cards unavailable for drawing.
     card_list = []
-    card_total = 0
 
     def __init__(self):
-        pass
+        # get 2 random cards that are available
+        self.random1 = random.choice(list(deck_of_cards.keys()))
+        self.random2 = random.choice(list(deck_of_cards.keys()))
+        # add random cards to player's card_list if available, and make unavailable
+        while not deck_of_cards[self.random1][2]:
+            self.random1 = random.choice(list(deck_of_cards.keys()))
+        self.card_list.append(self.random1)
+        deck_of_cards[self.random1][2] = False
+
+        while not deck_of_cards[self.random2][2]:
+            self.random2 = random.choice(list(deck_of_cards.keys()))
+        self.card_list.append(self.random2)
+        deck_of_cards[self.random2][2] = False
+
+    def calculate_score(self):
+        # calculates the score for a player based on the card_list
+        card_total = 0
+        for card in self.card_list:
+            card_total += deck_of_cards[card][1]
+
+        # run through cards again if over 21 to check for aces
+        if card_total > 21:
+            for card in self.card_list:
+                if deck_of_cards[card][0]:
+                    card_total -= 10 # makes ace card worth 1 pt instead of 11
+        return card_total
+
+    def add_card(self):
+        # adds another card to card_list
+        random_card = random.choice(list(deck_of_cards.keys()))
+        while not deck_of_cards[random_card][2]:
+            random_card = random.choice(list(deck_of_cards.keys()))
+        self.card_list.append(random_card)
+        deck_of_cards[random_card]
+        return self.card_list
 
 
-
+player1 = Player()
+print(deck_of_cards)
+print(player1.card_list)
+player1.add_card()
+print(player1.card_list)
+print(player1.calculate_score())
 
 
