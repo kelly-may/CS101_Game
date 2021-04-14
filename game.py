@@ -72,7 +72,7 @@ class Player:
         # run through cards again if over 21 to check for aces
         if card_total > 21:
             for card in self.card_list:
-                if deck_of_cards[card][0]:
+                if deck_of_cards[card][0] and card_total > 21:
                     card_total -= 10 # makes ace card worth 1 pt instead of 11
         return card_total
 
