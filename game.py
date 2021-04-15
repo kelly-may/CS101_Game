@@ -109,7 +109,9 @@ while True:
 for num in range(num_players):
     player_list.append(Player())
 
+# player's play one by one
 for player in range(len(player_list)):
+    print("----------------------------------------------")
     print("player " + str(player+1) + " your cards are: ")
     print(str(player_list[player].card_list))
     while True:
@@ -124,6 +126,57 @@ for player in range(len(player_list)):
             continue
         elif hold_deal == "h":
             break
+
+# now we deal the dealer's hands
+print("----------------------------------------------")
+print("The Dealer's hand is: ")
+print(dealer.card_list)
+while dealer.calculate_score() <= 17:
+    dealer.add_card()
+    print("dealer adds a card.")
+    print(dealer.card_list)
+
+print("dealer holds.")
+
+# calculate scores
+scores = []
+for player in range(len(player_list)):
+    score = player_list[player].calculate_score()
+    if score > 21:
+        scores.append(0)
+        print("player " + str(player + 1) + " scored " + str(score) + " ...BUST!")
+    else:
+        scores.append(score)
+        print("player " + str(player + 1) + " scored " + str(score))
+
+# calculate dealer's score:
+dealer_score = dealer.calculate_score()
+if dealer_score > 21:
+    print("dealer scored " + str(dealer_score) + "... BUST!")
+    dealer_score = 0
+else:
+    print("dealer scored " + str(dealer_score))
+
+# determine winner:
+temp = 0
+winner = 0
+for points in range(len(scores)):
+    if scores[points] > temp:
+        winner = points  # assign winner
+        temp = scores[points]  # use their score to compare next player
+if temp <= dealer_score:
+    winner = 7  # dealer wins
+
+if winner == 7:
+    print("dealer wins!")
+else:
+    print("player " + str(winner + 1) + " wins!")
+
+
+
+
+
+
 
 
 
