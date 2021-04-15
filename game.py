@@ -90,14 +90,49 @@ class Player:
         return self.card_list
 
 
-player1 = Player()
-print(player1.card_list)
-player2 = Player()
-print(player2.card_list)
+print("Let's Play BlackJack!")
+print("---------------------")
+dealer = Player()
+player_list = []
+while True:
+    try:
+        num_players = int(input("How many players? (1-6): "))
+    except Exception as e:
+        print("please print a valid number.")
+        continue
+    if 1 < num_players > 6:
+        print("please input a number 1-6: ")
+        continue
+    break
 
-player1.add_card()
-print(player1.card_list)
-print(player1.calculate_score())
-print(player2.calculate_score())
+# makes a Player instance for each player
+for num in range(num_players):
+    player_list.append(Player())
+
+for player in range(len(player_list)):
+    print("player " + str(player+1) + " your cards are: ")
+    print(str(player_list[player].card_list))
+    while True:
+        try:
+            hold_deal = input("(h)old or (d)eal another card?: ")
+        except Exception as e:
+            print("invalid entry.")
+            continue
+        if hold_deal == "d":
+            player_list[player].add_card()
+            print(str(player_list[player].card_list))
+            continue
+        elif hold_deal == "h":
+            break
+
+
+
+
+
+
+
+
+
+
 
 
