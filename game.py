@@ -41,8 +41,6 @@ deck_of_cards = {"Ace of Clubs": [True, 11, True], "Two of Clubs": [False, 2, Tr
 
 
 class Player:
-    # class for defining each player (2 - 7 per game)
-    # maxes number of players
     # assigns list of cards per player
     # calculates total value for each player
     # passes deck of cards so can make cards unavailable for drawing.
